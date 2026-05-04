@@ -389,10 +389,10 @@
   .wip-embed { border: 1px solid var(--line); overflow: hidden; }
 
   /* ─── GALLERY ─── */
-  .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
 
   .art-cell { aspect-ratio: 1; position: relative; overflow: hidden; cursor: pointer; }
-  .art-cell:nth-child(1) { aspect-ratio: 2/1; grid-column: span 2; }
+  .art-cell:nth-child(1) { aspect-ratio: 1; }
 
   .art-fill {
     width: 100%; height: 100%;
@@ -734,10 +734,6 @@
     <div class="art-cell reveal" style="transition-delay:0.16s">
       <div class="art-fill art-4"><img src="IMG_0170.PNG" alt="Plant room — digital illustration" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
       <div class="art-overlay"><div class="art-caption">Plant Room · Digital · 2023</div></div>
-    </div>
-    <div class="art-cell reveal" style="transition-delay:0.20s">
-      <div class="art-fill art-5"><img src="IMG_4473.jpg" alt="Digital illustration" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
-      <div class="art-overlay"><div class="art-caption">Untitled · Digital</div></div>
     </div>
   </div>
 
