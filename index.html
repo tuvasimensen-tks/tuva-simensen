@@ -443,6 +443,18 @@
   .gallery-grid.kvalsvik-photos .art-cell:nth-child(1),
   body .kvalsvik-photos .art-cell:nth-child(1) { grid-column: auto; aspect-ratio: 4 / 5; }
 
+  /* Lino poems and Poems as sideways-scrolling carousels */
+  .lino-poem-track { margin-bottom: 0; }
+  .lino-poem-track > .lino-poem-item { flex: 0 0 calc((100% - 48px) / 3); scroll-snap-align: start; }
+  .poems-track { align-items: flex-start; gap: 48px; }
+  .poems-track > .poem-entry { flex: 0 0 calc((100% - 48px) / 2); scroll-snap-align: start; padding: 40px 0 8px; max-width: none; }
+  .poems-track .poem-title { font-size: 28px; }
+  @media (max-width: 900px) {
+    .lino-poem-track > .lino-poem-item { flex-basis: 72%; }
+    .poems-track { gap: 24px; }
+    .poems-track > .poem-entry { flex-basis: 88%; }
+  }
+
   .art-fill {
     width: 100%; height: 100%;
     display: flex; align-items: center; justify-content: center;
@@ -868,7 +880,8 @@
   <div class="gallery-label reveal" style="margin-top: 64px;">Lino Print · Poems & Lyrics</div>
   <p class="gallery-series-intro reveal">Each print begins as a poem or a lyric. The image is where the words go when language isn't enough.</p>
 
-  <div class="lino-poem-grid">
+  <div class="birds-carousel-wrap reveal" data-carousel>
+    <div class="birds-carousel lino-poem-track">
 
     <!-- ── LINO POEM 1: Valentine ── -->
     <div class="lino-poem-item reveal">
@@ -925,6 +938,11 @@ We didn't train enough.</div>
     Add your title and poem text below it
     -->
 
+    </div>
+    <div class="birds-nav">
+      <button type="button" data-prev aria-label="Previous prints">←</button>
+      <button type="button" data-next aria-label="Next prints">→</button>
+    </div>
   </div>
 
   <div class="gallery-label reveal" style="margin-top: 64px;">Digital Art</div>
@@ -978,6 +996,9 @@ We didn't train enough.</div>
   ════════════════════════════════════════════════════════════
   -->
 
+
+  <div class="birds-carousel-wrap" data-carousel>
+    <div class="birds-carousel poems-track">
 
   <!-- ── POEM 1: Valentine ── -->
   <div class="poem-entry no-image reveal">
@@ -1136,6 +1157,13 @@ Here is you,
 Here is me.</div>
     </div>
 
+  </div>
+
+    </div>
+    <div class="birds-nav">
+      <button type="button" data-prev aria-label="Previous poems">←</button>
+      <button type="button" data-next aria-label="Next poems">→</button>
+    </div>
   </div>
 
 </section>
