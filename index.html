@@ -401,6 +401,43 @@
     .gallery-five .art-cell:nth-child(-n+2) { grid-column: span 3; }
   }
 
+  /* Birds on the Wire: intro, studio photo, then a sideways-scrolling carousel */
+  .birds-hero { aspect-ratio: 16 / 7; margin-bottom: 2px; }
+  .birds-carousel-wrap { position: relative; margin-top: 32px; }
+  .birds-carousel {
+    display: flex; gap: 24px;
+    overflow-x: auto; scroll-snap-type: x mandatory;
+    scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; padding-bottom: 4px;
+  }
+  .birds-carousel::-webkit-scrollbar { display: none; }
+  .bird-card { flex: 0 0 calc((100% - 48px) / 3); scroll-snap-align: start; }
+  .bird-card-image { aspect-ratio: 3 / 4; overflow: hidden; background: var(--dusk); }
+  .bird-card-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .bird-card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-weight: 300; font-style: italic;
+    color: var(--heading); margin: 14px 0 6px;
+  }
+  .bird-card-edition { font-size: 10px; letter-spacing: 0.14em; color: var(--mist); margin-left: 6px; font-style: normal; }
+  .bird-card-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; font-weight: 300; color: var(--ash); line-height: 1.7;
+  }
+  .birds-nav { display: flex; justify-content: flex-end; gap: 8px; margin-top: 20px; }
+  .birds-nav button {
+    width: 40px; height: 40px; border: 1px solid var(--line); background: transparent;
+    color: var(--heading); font-size: 16px; cursor: pointer; border-radius: 50%;
+    transition: background 0.2s, opacity 0.2s;
+  }
+  .birds-nav button:hover { background: var(--glow); }
+  .birds-nav button:disabled { opacity: 0.3; cursor: default; }
+  @media (max-width: 900px) {
+    .birds-hero { aspect-ratio: 4 / 3; }
+    .birds-carousel { gap: 16px; }
+    .bird-card { flex-basis: 72%; }
+  }
+
   .art-fill {
     width: 100%; height: 100%;
     display: flex; align-items: center; justify-content: center;
@@ -749,23 +786,40 @@
   </div>
 
   <div class="gallery-label reveal" style="margin-top: 64px;">Lino Print · Birds on the Wire</div>
+  <p class="gallery-series-intro reveal">In Norwegian, adding <em>-full</em> to a word turns it into a trait: <em>omsorgsfull</em> means caring, <em>spøkefull</em> means playful. In this series I swap <em>full</em> for <em>fugl</em>, bird, and each print becomes a bird who lives out that trait. Every bird has its own story and purpose in life, a small incarnation of something very human. Some make us laugh, some hold us together. We could all use a few more of them on our wire.</p>
 
-  <div class="gallery-grid">
-    <div class="art-cell reveal" style="grid-column: span 3; aspect-ratio: 16/7;">
-      <div class="art-fill"><img src="IMG_4162.jpeg" alt="Birds on the Wire — lino prints hanging in studio" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block;"></div>
-      <div class="art-overlay"><div class="art-caption">Birds on the Wire · Complete Series · Lino Print · 2024</div></div>
+  <div class="art-cell reveal birds-hero">
+    <div class="art-fill"><img src="IMG_4162.jpeg" alt="Birds on the Wire — the complete series of lino prints hanging in the studio" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block;"></div>
+    <div class="art-overlay"><div class="art-caption">Birds on the Wire · Complete Series · Lino Print · 2024</div></div>
+  </div>
+
+  <div class="birds-carousel-wrap reveal">
+    <div class="birds-carousel" id="birdsCarousel">
+
+      <div class="bird-card">
+        <div class="bird-card-image"><img src="IMG_4167.jpeg" alt="Omsorgsfugl — lino print, yellow bird on green"></div>
+        <div class="bird-card-name">Omsorgsfugl<span class="bird-card-edition">1/2</span></div>
+        <div class="bird-card-text">The caretaker. Absorbs all the bad in the world so others don't have to carry it. We need more birds like this.</div>
+      </div>
+
+      <div class="bird-card">
+        <div class="bird-card-image"><img src="IMG_4164.jpeg" alt="Spøkefugl — lino print on orange"></div>
+        <div class="bird-card-name">Spøkefugl<span class="bird-card-edition">4/5</span></div>
+        <div class="bird-card-text">The jokester. Always has a funny comment ready and knows exactly how to lift the mood.</div>
+      </div>
+
+      <div class="bird-card">
+        <div class="bird-card-image"><img src="IMG_4166.jpeg" alt="Betydningsfugl — lino print, peacock on cream"></div>
+        <div class="bird-card-name">Betydningsfugl<span class="bird-card-edition">3/10</span></div>
+        <div class="bird-card-text">The one who sees. A reminder that you matter to someone, and that we all matter to each other. Its purpose is to see others and make them feel seen.</div>
+      </div>
+
+      <!-- TO ADD A BIRD: copy a bird-card block above, change the image, name, edition and text -->
+
     </div>
-    <div class="art-cell reveal" style="transition-delay:0.08s">
-      <div class="art-fill"><img src="IMG_4164.jpeg" alt="Spøkefugl — lino print on orange" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
-      <div class="art-overlay"><div class="art-caption">Spøkefugl · 4/5 · Lino Print · 2024</div></div>
-    </div>
-    <div class="art-cell reveal" style="transition-delay:0.16s">
-      <div class="art-fill"><img src="IMG_4167.jpeg" alt="Omsorgsfugl — lino print on green" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
-      <div class="art-overlay"><div class="art-caption">Omsorgsfugl · 1/2 · Lino Print · 2024</div></div>
-    </div>
-    <div class="art-cell reveal" style="transition-delay:0.24s">
-      <div class="art-fill"><img src="IMG_4166.jpeg" alt="Betydningsfugl — lino print on cream" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
-      <div class="art-overlay"><div class="art-caption">Betydningsfugl · 3/10 · Lino Print · 2024</div></div>
+    <div class="birds-nav">
+      <button type="button" id="birdsPrev" aria-label="Previous birds">←</button>
+      <button type="button" id="birdsNext" aria-label="Next birds">→</button>
     </div>
   </div>
 
@@ -829,27 +883,6 @@ We didn't train enough.</div>
     Add your title and poem text below it
     -->
 
-  </div>
-
-  <div class="gallery-label reveal" style="margin-top: 64px;">Acrylic on Canvas</div>
-
-  <div class="gallery-grid">
-    <div class="art-cell reveal">
-      <div class="art-fill"><img src="IMG_4146.jpeg" alt="Eruption — acrylic on canvas" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
-      <div class="art-overlay"><div class="art-caption">Eruption · Acrylic on Canvas</div></div>
-    </div>
-    <div class="art-cell reveal" style="transition-delay:0.08s">
-      <div class="art-fill"><img src="IMG_4143.jpeg" alt="Face — acrylic on canvas" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
-      <div class="art-overlay"><div class="art-caption">Face · Acrylic on Canvas</div></div>
-    </div>
-    <div class="art-cell reveal" style="transition-delay:0.12s">
-      <div class="art-fill"><img src="IMG_4145.jpeg" alt="City — acrylic on canvas" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
-      <div class="art-overlay"><div class="art-caption">City · Acrylic on Canvas</div></div>
-    </div>
-    <div class="art-cell reveal" style="transition-delay:0.16s">
-      <div class="art-fill"><img src="IMG_4144.jpeg" alt="Portrait with butterfly — acrylic on canvas" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
-      <div class="art-overlay"><div class="art-caption">Portrait · Acrylic on Canvas</div></div>
-    </div>
   </div>
 
 </section>
@@ -1130,5 +1163,24 @@ Here is me.</div>
 </script>
 
 <script async src="//www.instagram.com/embed.js"></script>
+<script>
+(function () {
+  var track = document.getElementById('birdsCarousel');
+  if (!track) return;
+  var prev = document.getElementById('birdsPrev'), next = document.getElementById('birdsNext');
+  function page() { return track.clientWidth; }
+  function update() {
+    var max = track.scrollWidth - track.clientWidth - 2;
+    prev.disabled = track.scrollLeft <= 2;
+    next.disabled = track.scrollLeft >= max;
+    prev.parentNode.style.display = (track.scrollWidth <= track.clientWidth + 2) ? 'none' : '';
+  }
+  prev.addEventListener('click', function () { track.scrollBy({ left: -page(), behavior: 'smooth' }); });
+  next.addEventListener('click', function () { track.scrollBy({ left: page(), behavior: 'smooth' }); });
+  track.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+</script>
 </body>
 </html>
