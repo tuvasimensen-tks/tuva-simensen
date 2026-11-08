@@ -1167,7 +1167,7 @@ Here is me.</div>
     </div>
   </div>
 
-  <p class="insta-note">Paste more Instagram embed codes above to add more posts. Get them from any post → ··· → Embed.</p>
+  <!-- To add more Instagram posts: paste embed codes above (any post → ··· → Embed). -->
 
 </section>
 
@@ -1192,7 +1192,7 @@ Here is me.</div>
 
 <!-- FOOTER -->
 <footer>
-  <span>© 2025 Tuva Simensen</span>
+  <span>© <span id="year">2026</span> Tuva Simensen</span>
   <span>Thanks for checking in.</span>
 </footer>
 
@@ -1250,5 +1250,6 @@ Here is me.</div>
   });
 })();
 </script>
+<script>try { document.getElementById('year').textContent = new Date().getFullYear(); } catch (e) {}</script>
 </body>
 </html>
