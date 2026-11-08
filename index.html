@@ -116,12 +116,13 @@
 
   /* ─── HERO ─── */
   #hero {
-    min-height: 100vh;
+    min-height: 100vh; min-height: 100svh;
     display: flex; flex-direction: column; justify-content: flex-end;
-    padding-top: 140px; overflow: hidden;
-    background-image: url('tuva_ferdig-6.jpg');
+    padding-top: 140px; padding-bottom: 72px; overflow: hidden;
+    background-color: #2b322c;
+    background-image: url('hero.jpg');
     background-size: cover;
-    background-position: center 30%;
+    background-position: 50% 55%;
     background-repeat: no-repeat;
   }
 
@@ -129,42 +130,41 @@
     position: absolute; inset: 0;
     background: linear-gradient(
       to top,
-      rgba(140,158,128,0.97) 0%,
-      rgba(140,158,128,0.75) 30%,
-      rgba(120,138,108,0.25) 60%,
-      rgba(100,118,88,0.05) 100%
+      rgba(16,26,18,0.82) 0%,
+      rgba(16,26,18,0.45) 32%,
+      rgba(16,26,18,0.08) 62%,
+      rgba(16,26,18,0) 100%
     );
   }
 
-  .hero-name { color: var(--frost); text-shadow: 0 2px 32px rgba(40,55,35,0.45); }
-  .hero-eyebrow { text-shadow: 0 1px 8px rgba(40,55,35,0.3); }
-  .hero-tagline {
-    background: rgba(140,158,128,0.55);
-    backdrop-filter: blur(8px);
-    padding: 16px 22px;
-    border-left: 2px solid rgba(255,255,255,0.4);
-  }
-
   .hero-eyebrow {
+    position: relative;
     font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--frost); margin-bottom: 28px;
+    color: rgba(240,244,236,0.85); margin-bottom: 20px;
     opacity: 0; animation: up 0.8s 0.2s forwards;
   }
 
   .hero-name {
+    position: relative;
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(72px, 14vw, 200px); font-weight: 300;
-    line-height: 0.88; letter-spacing: -0.01em; color: var(--frost);
+    font-size: clamp(64px, 12vw, 176px); font-weight: 300;
+    line-height: 0.88; letter-spacing: -0.01em; color: #f2f5ee;
     opacity: 0; animation: up 0.9s 0.35s forwards;
   }
+  .hero-name em { font-style: italic; color: #f2f5ee; }
 
-  .hero-name em { font-style: italic; color: var(--frost); text-shadow: 0 2px 40px rgba(20,35,18,0.5); }
-
-  .hero-tagline {
-    margin-top: 40px; max-width: 420px;
-    font-size: 12px; color: var(--frost); line-height: 1.9;
+  .hero-links {
+    position: relative; display: flex; gap: 12px; flex-wrap: wrap; margin-top: 36px;
     opacity: 0; animation: up 0.8s 0.55s forwards;
   }
+  .hero-links a {
+    font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: #f2f5ee; text-decoration: none;
+    border: 1px solid rgba(242,245,238,0.55); padding: 12px 22px;
+    background: rgba(242,245,238,0.06);
+    transition: background 0.2s, color 0.2s;
+  }
+  .hero-links a:hover { background: #f2f5ee; color: #152916; }
 
   .hero-cta {
     display: inline-block; margin-top: 32px;
@@ -181,36 +181,29 @@
     border-color: rgba(15,31,16,0.7);
   }
 
-  .hero-scroll {
-    position: absolute; bottom: 48px; right: 80px;
-    font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
-    color: var(--mist); writing-mode: vertical-rl;
-    opacity: 0; animation: up 0.7s 0.85s forwards;
-  }
 
   /* ─── BIO ─── */
-  .bio-layout {
-    display: grid; grid-template-columns: 3fr 2fr;
-    gap: 80px; align-items: start;
-  }
-
+  .bio-layout { max-width: 760px; }
   .bio-text p { color: var(--ash); margin-bottom: 22px; line-height: 1.9; }
-
-  .bio-text p:first-child {
+  .bio-text > p:first-child {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 22px; font-weight: 300; font-style: italic;
+    font-size: 24px; font-weight: 300; font-style: italic;
     color: var(--pale); line-height: 1.5;
   }
+  .bio-facts { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sage); margin-bottom: 8px; }
+  .bio-more { margin-top: 24px; }
+  .bio-toggle { margin-top: 12px; }
 
-  .bio-aside { display: flex; flex-direction: column; gap: 1px; padding-top: 8px; }
-
-  .bio-row {
-    display: flex; justify-content: space-between;
-    padding: 14px 0; border-bottom: 1px solid var(--line);
-    font-size: 11px; color: var(--ash);
+  .bio-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 56px; max-width: 900px; }
+  .bio-tile { text-decoration: none; color: var(--heading); display: block; }
+  .bio-tile-img { aspect-ratio: 4 / 5; overflow: hidden; background: var(--dusk); }
+  .bio-tile-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+  .bio-tile:hover .bio-tile-img img { transform: scale(1.04); }
+  .bio-tile span {
+    display: block; margin-top: 12px;
+    font-family: 'Cormorant Garamond', serif; font-size: 22px; font-style: italic; font-weight: 300;
   }
-
-  .bio-row span:last-child { color: var(--sage); }
+  .bio-tile span::after { content: ' →'; font-style: normal; font-size: 16px; color: var(--sage); }
 
   .gallery-series-intro {
     font-size: 12px; color: var(--ash); line-height: 1.8;
@@ -710,7 +703,9 @@
       display: block; padding: 13px 4px;
       font-size: 11px; letter-spacing: 0.18em;
     }
-    .bio-layout { grid-template-columns: 1fr; gap: 48px; }
+    .bio-tiles { gap: 8px; margin-top: 40px; }
+    .bio-tile span { font-size: 17px; margin-top: 8px; }
+    .bio-tile span::after { font-size: 13px; }
     .gallery-grid { grid-template-columns: 1fr 1fr; }
     .art-cell:nth-child(1) { grid-column: span 2; }
     .poem-entry.has-image-left,
@@ -720,7 +715,6 @@
     }
     .contact-wrap { grid-template-columns: 1fr; gap: 60px; }
     footer { padding: 24px 24px; flex-direction: column; gap: 8px; }
-    .hero-scroll { display: none; }
   }
 </style>
 </head>
@@ -745,14 +739,13 @@
 <!-- HERO -->
 <section id="hero">
   <div class="hero-bg"></div>
-  <div class="hero-eyebrow">Music · Art · Poetry · A kind of journal</div>
+  <div class="hero-eyebrow">Music · Art · Poetry</div>
   <h1 class="hero-name">Tuva<br><em>Simensen</em></h1>
-  <p class="hero-tagline">
-    A quiet place to collect things,<br>
-    music, words, and images, shared gently<br>
-    with whoever finds their way here.
-  </p>
-  <div class="hero-scroll">Scroll</div>
+  <div class="hero-links" role="navigation" aria-label="Explore">
+    <a href="#music">Listen</a>
+    <a href="#gallery">See</a>
+    <a href="#poems">Read</a>
+  </div>
 </section>
 
 <!-- BIO -->
@@ -764,26 +757,37 @@
       <p>
         I am an independent artist combining music, poems, and visual art to express what lives beneath the surface, drawn to the deep notes, the melancholy, where heart and soul come together to quiet the storms and fill the nothingness with meaning.
       </p>
-      <p>
-        My visual work is always evolving. I move freely between digital drawing, lino printing, and acrylic on canvas, sometimes combining all three into something new. My music speaks in two voices: Mölte, my rock band with a clean rock and prog feel, and Tuva Simensen, my singer-songwriter project where I portrait feelings through lyrics and transcend pain into soundwaves.
-      </p>
-      <p>
-        I've been performing since my teens, first stepping on stage at Haugesund Rock Fest in 2006, and playing festivals, small venues, and scenes ever since. Often the three elements find each other: a poem that becomes a song, that finally gets painted on canvas, printed digitally, or pressed by hand. One search, wearing many forms.
-      </p>
-      <p>
-        Currently working on a series of lino prints of birds, acrylic paintings exploring abstraction and surrealism, and writing new music for Mölte.
-      </p>
-    </div>
-    <div class="bio-aside reveal" style="transition-delay:0.15s">
-      <div class="bio-row"><span>Based in</span><span>Haugesund, Norway</span></div>
-      <div class="bio-row"><span>Also in</span><span>Oslo</span></div>
-      <div class="bio-row"><span>Active since</span><span>2006</span></div>
-      <div class="bio-row"><span>First show</span><span>Haugesund Rock Fest</span></div>
-      <div class="bio-row"><span>Medium</span><span>Sound · Image · Text</span></div>
-      <div class="bio-row"><span>Available for</span><span>Collabs · Shows</span></div>
-      <div class="bio-row"><span>Currently</span><span>Lino prints · Painting · Mölte</span></div>
+      <div class="bio-facts">Haugesund · Oslo · Performing since 2006</div>
+      <div class="bio-more" id="bioMore" hidden>
+        <p>
+          My visual work is always evolving. I move freely between digital drawing, lino printing, and acrylic on canvas, sometimes combining all three into something new. My music speaks in two voices: Mölte, my rock band with a clean rock and prog feel, and Tuva Simensen, my singer-songwriter project where I portrait feelings through lyrics and transcend pain into soundwaves.
+        </p>
+        <p>
+          I've been performing since my teens, first stepping on stage at Haugesund Rock Fest in 2006, and playing festivals, small venues, and scenes ever since. Often the three elements find each other: a poem that becomes a song, that finally gets painted on canvas, printed digitally, or pressed by hand. One search, wearing many forms.
+        </p>
+        <p>
+          Currently working on a series of lino prints of birds, acrylic paintings exploring abstraction and surrealism, and writing new music for Mölte.
+        </p>
+      </div>
+      <button type="button" class="read-poem bio-toggle" aria-expanded="false" aria-controls="bioMore">Read more →</button>
     </div>
   </div>
+
+  <div class="bio-tiles reveal">
+    <a class="bio-tile" href="#music">
+      <div class="bio-tile-img"><img src="IMG_0044.PNG" alt="Mölte Parade — digital illustration"></div>
+      <span>Music</span>
+    </a>
+    <a class="bio-tile" href="#gallery">
+      <div class="bio-tile-img"><img src="kvalsvik-i-blatt.jpg" alt="Kvalsvik i Blått — lino print" style="object-position:center 55%"></div>
+      <span>Art</span>
+    </a>
+    <a class="bio-tile" href="#poems">
+      <div class="bio-tile-img"><img src="IMG_4153.jpeg" alt="Valentine — lino print"></div>
+      <span>Poetry</span>
+    </a>
+  </div>
+
   <a href="#contact" class="hero-cta reveal" style="margin-top: 56px;">Contact for booking or collaboration →</a>
 </section>
 
@@ -1426,6 +1430,16 @@ Here is me.</div>
   printCards.forEach(function (c, i) {
     addButton(c.querySelector('.lino-poem-text'), function () { open(prints, i); });
     var im = c.querySelector('.lino-poem-image'); if (im) { im.style.cursor = 'pointer'; im.addEventListener('click', function () { open(prints, i); }); }
+  });
+})();
+</script>
+<script>
+(function () {
+  var b = document.querySelector('.bio-toggle'), m = document.getElementById('bioMore');
+  if (!b || !m) return;
+  b.addEventListener('click', function () {
+    var open = m.hidden; m.hidden = !open;
+    b.setAttribute('aria-expanded', open); b.textContent = open ? 'Show less ←' : 'Read more →';
   });
 })();
 </script>
