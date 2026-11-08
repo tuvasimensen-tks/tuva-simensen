@@ -394,6 +394,13 @@
   .art-cell { aspect-ratio: 1; position: relative; overflow: hidden; cursor: pointer; }
   .art-cell:nth-child(1) { aspect-ratio: 1; }
 
+  /* Five-piece grid on desktop: two large on top, three below */
+  @media (min-width: 901px) {
+    .gallery-five { grid-template-columns: repeat(6, 1fr); }
+    .gallery-five .art-cell { grid-column: span 2; }
+    .gallery-five .art-cell:nth-child(-n+2) { grid-column: span 3; }
+  }
+
   .art-fill {
     width: 100%; height: 100%;
     display: flex; align-items: center; justify-content: center;
@@ -718,7 +725,7 @@
 
   <div class="gallery-label reveal">Digital Art</div>
 
-  <div class="gallery-grid">
+  <div class="gallery-grid gallery-five">
     <div class="art-cell reveal">
       <div class="art-fill art-1"><img src="IMG_0044.PNG" alt="Mölte parade — digital illustration" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
       <div class="art-overlay"><div class="art-caption">Mölte Parade · Digital · 2023</div></div>
@@ -734,6 +741,10 @@
     <div class="art-cell reveal" style="transition-delay:0.16s">
       <div class="art-fill art-4"><img src="IMG_0170.PNG" alt="Plant room — digital illustration" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
       <div class="art-overlay"><div class="art-caption">Plant Room · Digital · 2023</div></div>
+    </div>
+    <div class="art-cell reveal" style="transition-delay:0.2s">
+      <div class="art-fill art-5"><img src="demon.jpg" alt="Demon — digital line drawing of a figure holding a dandelion under a red sun, with creatures below" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+      <div class="art-overlay"><div class="art-caption">Demon · Digital · 2023</div></div>
     </div>
   </div>
 
