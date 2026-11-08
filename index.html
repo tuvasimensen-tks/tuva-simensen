@@ -516,7 +516,11 @@
   .shop-price-amount { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; color: var(--heading); line-height: 1; }
   .shop-price-label { margin-top: 10px; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mist); }
   .shop-track > .shop-item { flex: 0 0 calc((100% - 72px) / 4); scroll-snap-align: start; }
-  .shop-item-img { aspect-ratio: 3 / 4; overflow: hidden; background: var(--dusk); }
+  .shop-item-img { aspect-ratio: 3 / 4; overflow: hidden; background: var(--dusk); position: relative; }
+  .shop-badge {
+    position: absolute; top: 10px; left: 10px; background: #f2f5ee; color: var(--heading);
+    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; padding: 6px 9px;
+  }
   .shop-item-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .shop-item-name { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-style: italic; font-weight: 300; color: var(--heading); margin-top: 12px; }
   .shop-item-series { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mist); margin-top: 4px; }
@@ -1089,6 +1093,23 @@ We didn't train enough.</div>
 
 
   <!-- AVAILABLE PRINTS: a carousel of shop-item cards goes here once photos are ready -->
+
+  <div class="gallery-label reveal">Prints</div>
+  <div class="birds-carousel-wrap reveal" data-carousel style="margin-top:20px;margin-bottom:40px;">
+    <div class="birds-carousel shop-track">
+      <div class="shop-item">
+        <div class="shop-item-img"><img src="shop-valentine-framed.jpg" alt="Valentine — original lino print in an oak frame with passepartout" loading="lazy"><span class="shop-badge">Only one left</span></div>
+        <div class="shop-item-name">Valentine</div>
+        <div class="shop-item-series">Framed with passepartout · 950 kr</div>
+        <a class="shop-buy" href="mailto:tuva.simensen@gmail.com?subject=Print%3A%20Valentine%20%28framed%29&amp;body=Hi%20Tuva%2C%0A%0AI%20would%20like%20to%20buy%20the%20framed%20print%20%22Valentine%22%20%28950%20kr%29.%0A%0AName%3A%0AAddress%20/%20pickup%3A%0A">Buy by email →</a>
+      </div>
+      <!-- TO ADD A PRINT: copy a shop-item block above. Remove the shop-badge span if there are several left. To mark sold out, delete the block. -->
+    </div>
+    <div class="birds-nav">
+      <button type="button" data-prev aria-label="Previous prints">←</button>
+      <button type="button" data-next aria-label="Next prints">→</button>
+    </div>
+  </div>
 
   <div class="gallery-label reveal">Handmade postcards</div>
   <div class="birds-carousel-wrap reveal" data-carousel style="margin-top:20px;margin-bottom:40px;">
