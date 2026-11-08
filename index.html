@@ -438,6 +438,11 @@
     .bird-card { flex-basis: 72%; }
   }
 
+  .kvalsvik-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .kvalsvik-photos .art-cell { aspect-ratio: 4 / 5; }
+  .gallery-grid.kvalsvik-photos .art-cell:nth-child(1),
+  body .kvalsvik-photos .art-cell:nth-child(1) { grid-column: auto; aspect-ratio: 4 / 5; }
+
   .art-fill {
     width: 100%; height: 100%;
     display: flex; align-items: center; justify-content: center;
@@ -793,7 +798,7 @@
     <div class="art-overlay"><div class="art-caption">Birds on the Wire · Complete Series · Lino Print · 2024</div></div>
   </div>
 
-  <div class="birds-carousel-wrap reveal">
+  <div class="birds-carousel-wrap reveal" data-carousel>
     <div class="birds-carousel" id="birdsCarousel">
 
       <div class="bird-card">
@@ -830,8 +835,8 @@
 
     </div>
     <div class="birds-nav">
-      <button type="button" id="birdsPrev" aria-label="Previous birds">←</button>
-      <button type="button" id="birdsNext" aria-label="Next birds">→</button>
+      <button type="button" data-prev aria-label="Previous birds">←</button>
+      <button type="button" data-next aria-label="Next birds">→</button>
     </div>
   </div>
 
@@ -895,6 +900,56 @@ We didn't train enough.</div>
     Add your title and poem text below it
     -->
 
+  </div>
+
+  <div class="gallery-label reveal" style="margin-top: 64px;">Lino Print · Kvalsvik Series</div>
+  <p class="gallery-series-intro reveal">Kvalsvik is my favourite place in Haugesund: a small lighthouse on bare rock, facing the open sea. To me it stands for safe ground, for land in sight. I love it in every weather. In rain and storm, on light summer nights when the sun never goes down, and in October, when summer is over and you don't quite know where to go next. The surroundings change, but Kvalsvik doesn't move an inch. It's always there, keeping us safe.</p>
+
+  <div class="kvalsvik-photos">
+    <div class="art-cell reveal">
+      <div class="art-fill"><img src="kvalsvik-selfie.jpg" alt="Tuva at Kvalsvik lighthouse, black and white" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+      <div class="art-overlay"><div class="art-caption">Kvalsvik, Haugesund</div></div>
+    </div>
+    <div class="art-cell reveal" style="transition-delay:0.08s">
+      <div class="art-fill"><img src="kvalsvik-sunset.jpg" alt="Kvalsvik lighthouse on the rocks at sunset" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;display:block;"></div>
+      <div class="art-overlay"><div class="art-caption">Kvalsvik at dusk</div></div>
+    </div>
+  </div>
+
+  <div class="birds-carousel-wrap reveal" data-carousel>
+    <div class="birds-carousel">
+
+      <div class="bird-card">
+        <div class="bird-card-image"><img src="kvalsvik-i-blatt.jpg" alt="Kvalsvik i Blått — lino print in navy blue"></div>
+        <div class="bird-card-name">Kvalsvik i Blått<span class="bird-card-edition">1/10</span></div>
+        <div class="bird-card-text">The lighthouse and the rocks printed in deep navy blue.</div>
+      </div>
+
+      <div class="bird-card">
+        <div class="bird-card-image"><img src="kvalsvik-2-7.jpg" alt="Kvalsvik — lino print in black and blue with a red lighthouse roof"></div>
+        <div class="bird-card-name">Kvalsvik<span class="bird-card-edition">2/7</span></div>
+        <div class="bird-card-text">Black sea, a blue sky and a small red light on top.</div>
+      </div>
+
+      <div class="bird-card">
+        <div class="bird-card-image"><img src="kvalsvik-4-4.jpg" alt="Kvalsvik — lino print with a hand-painted golden sea"></div>
+        <div class="bird-card-name">Kvalsvik<span class="bird-card-edition">4/4</span></div>
+        <div class="bird-card-text">A blue sky over a hand-painted, shimmering golden sea.</div>
+      </div>
+
+      <div class="bird-card">
+        <div class="bird-card-image"><img src="kvalsvik-no-lighthouse.jpg" alt="You're No Lighthouse — lino print in black with a yellow streak"></div>
+        <div class="bird-card-name">You're No Lighthouse<span class="bird-card-edition">1/7</span></div>
+        <div class="bird-card-text">The print behind the poem of the same name, with a single streak of yellow light.</div>
+      </div>
+
+      <!-- TO ADD A PRINT: copy a bird-card block above, change the image, name, edition and text -->
+
+    </div>
+    <div class="birds-nav">
+      <button type="button" data-prev aria-label="Previous prints">←</button>
+      <button type="button" data-next aria-label="Next prints">→</button>
+    </div>
   </div>
 
 </section>
@@ -1177,21 +1232,22 @@ Here is me.</div>
 <script async src="//www.instagram.com/embed.js"></script>
 <script>
 (function () {
-  var track = document.getElementById('birdsCarousel');
-  if (!track) return;
-  var prev = document.getElementById('birdsPrev'), next = document.getElementById('birdsNext');
-  function page() { return track.clientWidth; }
-  function update() {
-    var max = track.scrollWidth - track.clientWidth - 2;
-    prev.disabled = track.scrollLeft <= 2;
-    next.disabled = track.scrollLeft >= max;
-    prev.parentNode.style.display = (track.scrollWidth <= track.clientWidth + 2) ? 'none' : '';
-  }
-  prev.addEventListener('click', function () { track.scrollBy({ left: -page(), behavior: 'smooth' }); });
-  next.addEventListener('click', function () { track.scrollBy({ left: page(), behavior: 'smooth' }); });
-  track.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', update);
-  update();
+  document.querySelectorAll('[data-carousel]').forEach(function (wrap) {
+    var track = wrap.querySelector('.birds-carousel');
+    var prev = wrap.querySelector('[data-prev]'), next = wrap.querySelector('[data-next]');
+    if (!track || !prev || !next) return;
+    function update() {
+      var max = track.scrollWidth - track.clientWidth - 2;
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft >= max;
+      prev.parentNode.style.display = (track.scrollWidth <= track.clientWidth + 2) ? 'none' : '';
+    }
+    prev.addEventListener('click', function () { track.scrollBy({ left: -track.clientWidth, behavior: 'smooth' }); });
+    next.addEventListener('click', function () { track.scrollBy({ left: track.clientWidth, behavior: 'smooth' }); });
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  });
 })();
 </script>
 </body>
