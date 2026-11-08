@@ -511,11 +511,15 @@
 
   /* Shop */
   .shop-intro { font-size: 12px; color: var(--ash); line-height: 1.8; max-width: 560px; margin-bottom: 32px; }
-  .shop-prices { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1040px; margin-bottom: 40px; }
+  .shop-prices { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; max-width: 1100px; margin-bottom: 40px; }
   .shop-price { border: 1px solid var(--line); padding: 20px 22px; }
   .shop-price-amount { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; color: var(--heading); line-height: 1; }
   .shop-price-label { margin-top: 10px; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mist); }
   .shop-track > .shop-item { flex: 0 0 calc((100% - 72px) / 4); scroll-snap-align: start; }
+  .shop-track { align-items: stretch; }
+  .shop-item { display: flex; flex-direction: column; }
+  .shop-item .shop-item-series { margin-bottom: 14px; }
+  .shop-item .shop-buy { margin-top: auto; align-self: flex-start; }
   .shop-item-img { aspect-ratio: 3 / 4; overflow: hidden; background: var(--dusk); position: relative; }
   .shop-badge {
     position: absolute; top: 10px; left: 10px; background: #f2f5ee; color: var(--heading);
@@ -1074,7 +1078,7 @@ We didn't train enough.</div>
 <section id="shop">
   <div class="label">004 — Buy</div>
   <h2 class="section-title">Shop</h2>
-  <p class="shop-intro reveal">Every print is an original lino print, hand-pulled and signed in my studio, and every postcard is handmade. See the prints in the Art section above, then send me an email with the one you'd like and I'll get back to you about payment and delivery.</p>
+  <p class="shop-intro reveal">Every print is an original lino print, hand-pulled and signed in my studio, the originals are one-off acrylic paintings with lino print, and every postcard is handmade. See the prints in the Art section above, then send me an email with the one you'd like and I'll get back to you about payment and delivery.</p>
 
   <div class="shop-prices reveal">
     <div class="shop-price">
@@ -1088,6 +1092,10 @@ We didn't train enough.</div>
     <div class="shop-price">
       <div class="shop-price-amount">1050 kr</div>
       <div class="shop-price-label">Framed A3 with passepartout</div>
+    </div>
+    <div class="shop-price">
+      <div class="shop-price-amount">1500 kr</div>
+      <div class="shop-price-label">Original acrylic &amp; lino · A3</div>
     </div>
     <div class="shop-price">
       <div class="shop-price-amount">60 kr</div>
@@ -1133,6 +1141,36 @@ We didn't train enough.</div>
     </div>
   </div>
 
+  <div class="gallery-label reveal">Originals · Acrylic &amp; lino</div>
+  <p class="shop-intro reveal" style="margin:14px 0 0;">One-off pieces: hand-painted acrylic backgrounds with a lino print on top. Each exists only once.</p>
+  <div class="birds-carousel-wrap reveal" data-carousel style="margin-top:20px;margin-bottom:40px;">
+    <div class="birds-carousel shop-track">
+      <div class="shop-item">
+        <div class="shop-item-img"><img src="original-valentine-ii.jpg" alt="Valentine II — original acrylic painting with lino print, a black heart on pink and red" loading="lazy"><span class="shop-badge">One of a kind</span></div>
+        <div class="shop-item-name">Valentine II</div>
+        <div class="shop-item-series">Acrylic &amp; lino · A3 · 1500 kr</div>
+        <a class="shop-buy" href="mailto:tuva.simensen@gmail.com?subject=Original%3A%20Valentine%20II&amp;body=Hi%20Tuva%2C%0A%0AI%20would%20like%20to%20buy%20the%20original%20%22Valentine%20II%22%20%28acrylic%20%26%20lino%2C%20A3%2C%201500%20kr%29.%0A%0AName%3A%0AAddress%20/%20pickup%3A%0A">Buy by email →</a>
+      </div>
+      <div class="shop-item">
+        <div class="shop-item-img"><img src="original-valentine.jpg" alt="Valentine — original acrylic painting with lino print, a black heart on a red gradient, framed" loading="lazy"><span class="shop-badge">One of a kind</span></div>
+        <div class="shop-item-name">Valentine</div>
+        <div class="shop-item-series">Acrylic &amp; lino · A3 · 1500 kr</div>
+        <a class="shop-buy" href="mailto:tuva.simensen@gmail.com?subject=Original%3A%20Valentine&amp;body=Hi%20Tuva%2C%0A%0AI%20would%20like%20to%20buy%20the%20original%20%22Valentine%22%20%28acrylic%20%26%20lino%2C%20A3%2C%201500%20kr%29.%0A%0AName%3A%0AAddress%20/%20pickup%3A%0A">Buy by email →</a>
+      </div>
+      <div class="shop-item">
+        <div class="shop-item-img"><img src="original-fryktlos.jpg" alt="Fryktløs — original acrylic painting with lino print, a paraglider among pastel clouds, framed" loading="lazy"><span class="shop-badge">One of a kind</span></div>
+        <div class="shop-item-name">Fryktløs</div>
+        <div class="shop-item-series">Acrylic &amp; lino · A3 · 1500 kr</div>
+        <a class="shop-buy" href="mailto:tuva.simensen@gmail.com?subject=Original%3A%20Fryktl%C3%B8s&amp;body=Hi%20Tuva%2C%0A%0AI%20would%20like%20to%20buy%20the%20original%20%22Fryktl%C3%B8s%22%20%28acrylic%20%26%20lino%2C%20A3%2C%201500%20kr%29.%0A%0AName%3A%0AAddress%20/%20pickup%3A%0A">Buy by email →</a>
+      </div>
+      <!-- TO ADD AN ORIGINAL: copy a shop-item block above. When sold, delete its block. -->
+    </div>
+    <div class="birds-nav">
+      <button type="button" data-prev aria-label="Previous originals">←</button>
+      <button type="button" data-next aria-label="Next originals">→</button>
+    </div>
+  </div>
+
   <div class="gallery-label reveal">Handmade postcards</div>
   <div class="birds-carousel-wrap reveal" data-carousel style="margin-top:20px;margin-bottom:40px;">
     <div class="birds-carousel shop-track">
@@ -1162,7 +1200,7 @@ We didn't train enough.</div>
     </div>
   </div>
 
-  <a class="hero-cta reveal shop-main-buy" href="mailto:tuva.simensen@gmail.com?subject=Buying%20a%20print&amp;body=Hi%20Tuva%2C%0A%0AI%20would%20like%20to%20buy%3A%0A%0APrint%28s%29%20/%20postcard%28s%29%3A%0A%5B%20%5D%20Print%20only%2C%20A4%20%28600%20kr%29%0A%5B%20%5D%20Framed%20with%20passepartout%20%28950%20kr%29%0A%5B%20%5D%20Framed%20A3%20with%20passepartout%20%281050%20kr%29%0A%5B%20%5D%20Handmade%20postcard%20%2860%20kr%29%0A%0AName%3A%0AAddress%20/%20pickup%3A%0A" style="margin-top:0;">Order a print by email →</a>
+  <a class="hero-cta reveal shop-main-buy" href="mailto:tuva.simensen@gmail.com?subject=Buying%20a%20print&amp;body=Hi%20Tuva%2C%0A%0AI%20would%20like%20to%20buy%3A%0A%0APrint%28s%29%20/%20postcard%28s%29%3A%0A%5B%20%5D%20Print%20only%2C%20A4%20%28600%20kr%29%0A%5B%20%5D%20Framed%20with%20passepartout%20%28950%20kr%29%0A%5B%20%5D%20Framed%20A3%20with%20passepartout%20%281050%20kr%29%0A%5B%20%5D%20Original%20acrylic%20%26%20lino%2C%20A3%20%281500%20kr%29%0A%5B%20%5D%20Handmade%20postcard%20%2860%20kr%29%0A%0AName%3A%0AAddress%20/%20pickup%3A%0A" style="margin-top:0;">Order a print by email →</a>
 
   <p class="shop-note reveal">Questions or other sizes? Just ask in the same email.</p>
 </section>
