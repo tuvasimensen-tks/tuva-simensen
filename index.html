@@ -455,6 +455,67 @@
     .poems-track > .poem-entry { flex-basis: 88%; }
   }
 
+  /* Poem previews + full-screen reader */
+  .poems-track .poem-header { margin-bottom: 20px; }
+  .poems-track .poem-text,
+  .lino-poem-track .lino-poem-body {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+            mask-image: linear-gradient(to bottom, #000 55%, transparent);
+  }
+  .poems-track .poem-text { max-height: calc(1.85em * 5); }
+  .lino-poem-track .lino-poem-body { max-height: calc(1.8em * 4); }
+  .read-poem {
+    margin-top: 16px; padding: 0; border: 0; background: none; cursor: pointer;
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--sage);
+    border-bottom: 1px solid var(--line); padding-bottom: 4px;
+  }
+  .read-poem:hover { color: var(--heading); border-color: var(--heading); }
+
+  .reader {
+    position: fixed; inset: 0; z-index: 1000;
+    background: #c8d4bc; color: var(--pale);
+    display: none; flex-direction: column;
+  }
+  .reader.open { display: flex; }
+  .reader-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 24px; border-bottom: 1px solid var(--line); flex-shrink: 0;
+  }
+  .reader-count { font-size: 10px; letter-spacing: 0.2em; color: var(--mist); }
+  .reader-bar button, .reader-nav button {
+    width: 40px; height: 40px; border: 1px solid var(--line); border-radius: 50%;
+    background: transparent; color: var(--heading); font-size: 16px; cursor: pointer;
+  }
+  .reader-bar button:hover, .reader-nav button:hover { background: var(--glow); }
+  .reader-nav button:disabled { opacity: 0.3; cursor: default; }
+  .reader-scroll { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .reader-inner {
+    max-width: 980px; margin: 0 auto; padding: 48px 24px 64px;
+    display: grid; grid-template-columns: 1fr; gap: 48px; align-items: start;
+  }
+  .reader-inner.has-img { grid-template-columns: 1fr 1.2fr; }
+  .reader-inner:not(.has-img) { max-width: 680px; }
+  .reader-img img { width: 100%; display: block; }
+  .reader-title {
+    font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300;
+    font-style: italic; color: var(--heading); margin-bottom: 8px; line-height: 1.2;
+  }
+  .reader-sub { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--mist); margin-bottom: 32px; }
+  .reader-text {
+    font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300;
+    line-height: 1.85; white-space: pre-line;
+  }
+  .reader-text em { font-style: italic; color: var(--lavender); }
+  .reader-nav { display: flex; justify-content: space-between; padding: 0 24px 24px; max-width: 980px; margin: 0 auto; width: 100%; }
+  body.reader-lock { overflow: hidden; }
+  @media (max-width: 900px) {
+    .reader-inner.has-img { grid-template-columns: 1fr; gap: 32px; }
+    .reader-inner { padding: 32px 24px 48px; }
+    .reader-title { font-size: 30px; }
+  }
+
   .art-fill {
     width: 100%; height: 100%;
     display: flex; align-items: center; justify-content: center;
@@ -1279,5 +1340,94 @@ Here is me.</div>
 })();
 </script>
 <script>try { document.getElementById('year').textContent = new Date().getFullYear(); } catch (e) {}</script>
+<!-- POEM READER (filled by script) -->
+<div class="reader" id="reader" role="dialog" aria-modal="true" aria-label="Poem" hidden>
+  <div class="reader-bar">
+    <span class="reader-count" id="readerCount"></span>
+    <button type="button" id="readerClose" aria-label="Close">✕</button>
+  </div>
+  <div class="reader-scroll" id="readerScroll">
+    <div class="reader-inner" id="readerInner"></div>
+    <div class="reader-nav">
+      <button type="button" id="readerPrev" aria-label="Previous poem">←</button>
+      <button type="button" id="readerNext" aria-label="Next poem">→</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var reader = document.getElementById('reader');
+  if (!reader) return;
+  var inner = document.getElementById('readerInner'), count = document.getElementById('readerCount');
+  var prev = document.getElementById('readerPrev'), next = document.getElementById('readerNext');
+  var scroller = document.getElementById('readerScroll');
+  var list = [], idx = 0, lastFocus = null;
+
+  function esc(t) { var d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+  function render() {
+    var it = list[idx];
+    inner.className = 'reader-inner' + (it.img ? ' has-img' : '');
+    inner.innerHTML = (it.img ? '<div class="reader-img"><img src="' + it.img + '" alt="' + esc(it.alt || it.title) + '"></div>' : '') +
+      '<div><div class="reader-title">' + esc(it.title) + '</div><div class="reader-sub">' + esc(it.sub || 'Tuva Simensen') + '</div>' +
+      '<div class="reader-text">' + it.html + '</div></div>';
+    count.textContent = (idx + 1) + ' / ' + list.length;
+    prev.disabled = idx === 0; next.disabled = idx === list.length - 1;
+    scroller.scrollTop = 0;
+  }
+  function open(l, i) {
+    list = l; idx = i; lastFocus = document.activeElement;
+    render(); reader.hidden = false; reader.classList.add('open');
+    document.body.classList.add('reader-lock');
+    document.getElementById('readerClose').focus();
+  }
+  function close() {
+    reader.classList.remove('open'); reader.hidden = true;
+    document.body.classList.remove('reader-lock');
+    if (lastFocus) lastFocus.focus();
+  }
+  prev.addEventListener('click', function () { if (idx > 0) { idx--; render(); } });
+  next.addEventListener('click', function () { if (idx < list.length - 1) { idx++; render(); } });
+  document.getElementById('readerClose').addEventListener('click', close);
+  document.addEventListener('keydown', function (e) {
+    if (!reader.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') prev.click();
+    if (e.key === 'ArrowRight') next.click();
+  });
+
+  function addButton(card, onClick) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'read-poem'; b.textContent = 'Read poem →';
+    b.addEventListener('click', onClick);
+    card.appendChild(b);
+  }
+
+  // Poems section
+  var poemCards = [].slice.call(document.querySelectorAll('.poems-track > .poem-entry'));
+  var poems = poemCards.map(function (c) {
+    return {
+      title: c.querySelector('.poem-title').textContent.trim(),
+      sub: (c.querySelector('.poem-date') || {}).textContent,
+      html: c.querySelector('.poem-text').innerHTML
+    };
+  });
+  poemCards.forEach(function (c, i) { addButton(c.querySelector('.poem-body'), function () { open(poems, i); }); });
+
+  // Poems & Lyrics prints: show the print with the full poem when it exists in Poems
+  var printCards = [].slice.call(document.querySelectorAll('.lino-poem-track > .lino-poem-item'));
+  var prints = printCards.map(function (c) {
+    var title = c.querySelector('.lino-poem-title').textContent.trim();
+    var full = poems.filter(function (p) { return p.title.toLowerCase() === title.toLowerCase(); })[0];
+    var img = c.querySelector('img');
+    return { title: title, sub: 'Lino print · Tuva Simensen', html: full ? full.html : c.querySelector('.lino-poem-body').innerHTML,
+             img: img ? img.getAttribute('src') : null, alt: img ? img.alt : '' };
+  });
+  printCards.forEach(function (c, i) {
+    addButton(c.querySelector('.lino-poem-text'), function () { open(prints, i); });
+    var im = c.querySelector('.lino-poem-image'); if (im) { im.style.cursor = 'pointer'; im.addEventListener('click', function () { open(prints, i); }); }
+  });
+})();
+</script>
 </body>
 </html>
