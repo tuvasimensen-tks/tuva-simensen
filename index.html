@@ -537,6 +537,28 @@
   .commission { border: 1px solid var(--line); padding: 28px 28px 30px; margin: 8px 0 40px; max-width: 640px; background: rgba(242,245,238,0.25); }
   .commission-text { font-family: 'Cormorant Garamond', serif; font-size: 21px; font-weight: 300; font-style: italic; color: var(--heading); line-height: 1.5; margin-bottom: 18px; }
   .commission .shop-buy { margin-top: 0; }
+  .shop-info { border: 1px solid var(--line); margin: 0 0 44px; max-width: 860px; background: rgba(242,245,238,0.25); }
+  .shop-info summary {
+    list-style: none; cursor: pointer; padding: 18px 22px;
+    display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 16px;
+  }
+  .shop-info summary::-webkit-details-marker { display: none; }
+  .shop-info-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-style: italic; font-weight: 300; color: var(--heading); }
+  .shop-info-title::after { content: ' +'; font-style: normal; color: var(--sage); }
+  .shop-info[open] .shop-info-title::after { content: ' −'; }
+  .shop-info-hint { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mist); }
+  .shop-info-body { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 4px 22px 24px; border-top: 1px solid var(--line); padding-top: 20px; }
+  .shop-info-head { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage); margin-bottom: 10px; }
+  .shop-info-prices { list-style: none; padding: 0; margin: 0; }
+  .shop-info-prices li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--ash); }
+  .shop-info-prices li span:last-child { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--heading); white-space: nowrap; }
+  .shop-info-steps { margin: 0; padding-left: 18px; font-size: 12px; color: var(--ash); line-height: 1.8; }
+  .shop-info-text { font-size: 12px; color: var(--ash); line-height: 1.8; margin: 0; }
+  @media (max-width: 900px) {
+    .shop-info-body { grid-template-columns: 1fr; gap: 24px; }
+    .shop-info summary { padding: 16px 18px; }
+    .shop-info-body { padding: 18px 18px 20px; }
+  }
   .shop-note { margin-top: 32px; font-size: 12px; color: var(--ash); }
   .shop-note a { color: var(--sage); }
   @media (max-width: 900px) {
@@ -1081,33 +1103,36 @@ We didn't train enough.</div>
 <section id="shop">
   <div class="label">004 — Buy</div>
   <h2 class="section-title">Shop</h2>
-  <p class="shop-intro reveal">Every print is an original lino print, hand-pulled and signed in my studio, the originals are one-off acrylic paintings with lino print, and every postcard is handmade. See the prints in the Art section above, then send me an email with the one you'd like and I'll get back to you about payment and delivery.</p>
+  <p class="shop-intro reveal">Every print is an original lino print, hand-pulled and signed in my studio, the originals are one-off acrylic paintings with lino print, and every postcard is handmade. Pick a piece below and send me an email, and I'll get back to you.</p>
 
-  <div class="shop-prices reveal">
-    <div class="shop-price">
-      <div class="shop-price-amount">600 kr</div>
-      <div class="shop-price-label">Original lino print · A4</div>
+  <details class="shop-info reveal">
+    <summary>
+      <span class="shop-info-title">Prices, payment &amp; delivery</span>
+      <span class="shop-info-hint">From 60 kr · Vipps · Haugesund pickup</span>
+    </summary>
+    <div class="shop-info-body">
+      <div class="shop-info-col">
+        <div class="shop-info-head">Prices</div>
+        <ul class="shop-info-prices">
+          <li><span>Original lino print, A4</span><span>600 kr</span></li>
+          <li><span>Framed with passepartout</span><span>950 kr</span></li>
+          <li><span>Framed A3 with passepartout</span><span>1050 kr</span></li>
+          <li><span>Original acrylic &amp; lino, A3, framed</span><span>1500 kr</span></li>
+          <li><span>Handmade postcard</span><span>60 kr</span></li>
+        </ul>
+      </div>
+      <div class="shop-info-col">
+        <div class="shop-info-head">How to buy</div>
+        <ol class="shop-info-steps">
+          <li>Tap "Buy by email" on the piece you'd like.</li>
+          <li>I confirm it's available and send you my Vipps details.</li>
+          <li>Pay with Vipps, and we agree on pickup or delivery.</li>
+        </ol>
+        <div class="shop-info-head" style="margin-top:20px;">Delivery</div>
+        <p class="shop-info-text">Pickup or delivery in the Haugesund area. Shipping elsewhere is possible, at cost for the buyer.</p>
+      </div>
     </div>
-    <div class="shop-price">
-      <div class="shop-price-amount">950 kr</div>
-      <div class="shop-price-label">Framed with passepartout</div>
-    </div>
-    <div class="shop-price">
-      <div class="shop-price-amount">1050 kr</div>
-      <div class="shop-price-label">Framed A3 with passepartout</div>
-    </div>
-    <div class="shop-price">
-      <div class="shop-price-amount">1500 kr</div>
-      <div class="shop-price-label">Original acrylic &amp; lino · A3, framed</div>
-    </div>
-    <div class="shop-price">
-      <div class="shop-price-amount">60 kr</div>
-      <div class="shop-price-label">Handmade postcard</div>
-    </div>
-  </div>
-
-
-  <!-- AVAILABLE PRINTS: a carousel of shop-item cards goes here once photos are ready -->
+  </details>
 
   <div class="gallery-label reveal">Prints</div>
   <div class="birds-carousel-wrap reveal" data-carousel style="margin-top:20px;margin-bottom:40px;">
